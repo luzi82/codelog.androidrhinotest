@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
 
 		good0();
 		// bad0();
-		// bad1();
+		good1();
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 		Scriptable scope = cx.initStandardObjects();
 		cx.evaluateString(scope, "x=42;", "<cmd>", 0, null);
 		Object result = cx.evaluateString(scope, "x", "<cmd>", 0, null);
-		Log.v("androidrhinotest", result.toString());
+		Log.v("androidrhinotest", "bad0: " + result.toString());
 		Context.exit();
 	}
 
@@ -46,13 +46,14 @@ public class MainActivity extends Activity {
 		Context.exit();
 	}
 
-	public void bad1() {
+	public void good1() {
 		Context cx = Context.enter();
 		cx.setOptimizationLevel(-1);
 		Scriptable scope = cx.initStandardObjects();
 		cx.evaluateString(scope, "x=function(){return 42;};", "<cmd>", 0, null);
-		Callable c = (Callable) cx.evaluateString(scope, "x", "<cmd>", 0, null);
-		c.call(cx, scope, null, null); // die
+		Callable c = (Callable) scope.get("x", scope);
+		Object result = c.call(cx, scope, null, new Object[0]); // die
+		Log.v("androidrhinotest", "bad1: " + result.toString());
 		Context.exit();
 	}
 
