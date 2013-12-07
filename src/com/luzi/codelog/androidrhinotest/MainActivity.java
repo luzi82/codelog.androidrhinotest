@@ -42,8 +42,7 @@ public class MainActivity extends Activity {
 		Context cx = Context.enter();
 		// cx.setOptimizationLevel(-1);
 		Scriptable scope = cx.initStandardObjects();
-		cx.evaluateString(scope, "x=42;", "<cmd>", 0, null);
-		cx.evaluateString(scope, "x", "<cmd>", 0, null); // die
+		cx.evaluateString(scope, "x=42;", "<cmd>", 0, null); // die
 		Context.exit();
 	}
 
