@@ -52,7 +52,8 @@ public class MainActivity extends Activity {
 		Scriptable scope = cx.initStandardObjects();
 		cx.evaluateString(scope, "x=function(){return 42;};", "<cmd>", 0, null);
 		Callable c = (Callable) scope.get("x", scope);
-		Object result = c.call(cx, scope, null, new Object[0]); // die
+		// Object result = c.call(cx, scope, null, null); // die
+		Object result = c.call(cx, scope, null, new Object[0]); // good
 		Log.v("androidrhinotest", "bad1: " + result.toString());
 		Context.exit();
 	}
