@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 		Scriptable scope = cx.initStandardObjects();
 		cx.evaluateString(scope, "x=42;", "<cmd>", 0, null);
 		Object result = cx.evaluateString(scope, "x", "<cmd>", 0, null);
-		Log.v("androidrhinotest", "bad0: " + result.toString());
+		Log.v("androidrhinotest", "good0: " + result.toString());
 		Context.exit();
 	}
 
@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 		Callable c = (Callable) scope.get("x", scope);
 		// Object result = c.call(cx, scope, null, null); // die
 		Object result = c.call(cx, scope, null, new Object[0]); // good
-		Log.v("androidrhinotest", "bad1: " + result.toString());
+		Log.v("androidrhinotest", "good1: " + result.toString());
 		Context.exit();
 	}
 
